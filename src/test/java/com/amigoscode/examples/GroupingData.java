@@ -14,7 +14,15 @@ public class GroupingData {
 
     @Test
     public void simpleGrouping() throws Exception {
-        List<Car> cars = MockData.getCars();
+        Map<String, List<Car>> map = MockData.getCars()
+                .stream()
+                .collect(Collectors.groupingBy(Car::getColor));
+        map.forEach((color, cars) -> {
+            System.out.println("Color " + color);
+            cars.forEach(System.out::println);
+            System.out.println("---------------------");
+        });
+
     }
 
     @Test
